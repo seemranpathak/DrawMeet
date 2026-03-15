@@ -2,10 +2,22 @@ import express from 'express';
 import connect from './db/connect.js';
 import { Server } from 'socket.io';
 import http from 'http'
+import cors from 'cors';
+import router from './routes/auth.js';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const app = express();
+app.use(cors());
 app.use(express.json());
 
+
+
+app.get('/', (req, res) => {
+  res.json({ port });
+});
+
+app.use('/api/auth', router);
 connect();
 
 
@@ -16,6 +28,9 @@ const io = new Server(server, {
     methods: ["GET", "POST"]
   }
 });
+
+const port = process.env.PORT || 8000;
+console.log(`✅ Server will run on port ${port}`);
 
 io.on('connection', (socket) => {
   console.log('A user connected:', socket.id);
@@ -48,6 +63,8 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(5000, () => {
-  console.log('Socket.IO server listening on port 5000');
+server.listen(port, (req, res) => {
+  console.log(`Socket.IO server listening on port ${port}`);
 });
+
+

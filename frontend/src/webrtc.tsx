@@ -97,10 +97,10 @@ const WebRTC:React.FC = () => {
             
             // Simulating remote peer's answer for demonstration purposes
             log("Simulating remote peer's answer...");
-            const answer = await pc.createAnswer();
-            await pc.setRemoteDescription(offer);
-            await pc.setLocalDescription(answer);
-            log(`Simulated SDP Answer created and set as local description:\n${JSON.stringify(answer)}`);
+            //const answer = await pc.createAnswer();
+            //await pc.setRemoteDescription(offer);
+            //await pc.setLocalDescription(answer);
+            //log(`Simulated SDP Answer created and set as local description:\n${JSON.stringify(answer)}`);
 
         } catch (error: any) {
             handleError(error);

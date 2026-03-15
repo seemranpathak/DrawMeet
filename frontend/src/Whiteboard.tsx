@@ -101,15 +101,21 @@ export const Whiteboard = () => {
       }
     });
 
-    newSocket.on('objectModified', (data: { object: any; userId: string }) => {
+    newSocket.on('objectModified', (data: { object:any ; userId: string }) => {
       // Update an object modified by another user
       if (fabricCanvas && data.userId !== newUserId) {
-        fabricCanvas.loadFromJSON(data.object, (o: FabricObject) => {
-          const existingObj = fabricCanvas.getObjects().find(obj => obj.id === o.id);
+        fabricCanvas.loadFromJSON(data.object, (o:FabricObject) => {
+          //const existingObj = fabricCanvas.getObjects()
+          const existingObj = fabricCanvas.getObjects().find(obj => obj.id===o.id);
+         
+        
+        
+          
           if (existingObj) {
             existingObj.set(o.toJSON()); // Update properties
             fabricCanvas.renderAll();
-          } else {
+          }
+           else {
             // If object doesn't exist (e.g., new shape added by another user)
             fabricCanvas.add(o);
             fabricCanvas.renderAll();
@@ -330,8 +336,8 @@ export const Whiteboard = () => {
 
   // Prepare collaborators list for display, including current user
   const displayCollaborators = [
-    { id: userId, name: "You", color: userColorRef.current, isActive: true },
-    { id: userId, name: "neha", color: userColorRef.current, isActive: true },
+    { id: "user_id", name: "You", color: userColorRef.current, isActive: true },
+    { id: "neha_id", name: "neha", color: userColorRef.current, isActive: true },
     ...collaborators.filter(c => c.id !== userId)
   ];
 
