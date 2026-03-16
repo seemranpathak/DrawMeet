@@ -72,7 +72,7 @@ const WebRTC:React.FC = () => {
                 if (event.candidate) {
                     log(`ICE candidate generated: ${JSON.stringify(event.candidate)}`);
                     // In a real app, this candidate would be sent to the remote peer
-                    pc.addIceCandidate(event.candidate); // Simulating local "trickle"
+                    //pc.addIceCandidate(event.candidate); // Simulating local "trickle"
                 }
             };
 
@@ -97,6 +97,18 @@ const WebRTC:React.FC = () => {
             
             // Simulating remote peer's answer for demonstration purposes
             log("Simulating remote peer's answer...");
+
+
+//...............
+await pc.setRemoteDescription(offer);
+
+const answer = await pc.createAnswer();
+await pc.setLocalDescription(answer);
+
+log(`Simulated SDP Answer:\n${JSON.stringify(answer)}`);
+//...............
+
+
             //const answer = await pc.createAnswer();
             //await pc.setRemoteDescription(offer);
             //await pc.setLocalDescription(answer);
@@ -132,7 +144,7 @@ const WebRTC:React.FC = () => {
 
     return (
         <div className="bg-gray-900 text-gray-200 min-h-screen flex flex-col items-center justify-center p-8 font-['Inter'] relative">
-            <h1 className="text-4xl font-bold mb-8 text-white">Simple WebRTC Video Chat</h1>
+            <h1 className="text-4xl font-bold mb-8 text-white">DrawMeet- Video Chat</h1>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl mb-8">
                 {/* Local Video Box */}
@@ -167,9 +179,9 @@ const WebRTC:React.FC = () => {
             </div>
 
             {/* Message/Status box */}
-            <pre ref={messageBoxRef} className="bg-gray-800 text-gray-300 p-4 rounded-xl w-full max-w-5xl min-h-[150px] max-h-[300px] overflow-y-auto whitespace-pre-wrap text-sm font-mono shadow-inner">
+            {/* <pre ref={messageBoxRef} className="bg-gray-800 text-gray-300 p-4 rounded-xl w-full max-w-5xl min-h-[150px] max-h-[300px] overflow-y-auto whitespace-pre-wrap text-sm font-mono shadow-inner">
                 {logs.join('\n')}
-            </pre>
+            </pre> */}
 
             {/* Permission Error Modal */}
             {permissionError && (
