@@ -4,7 +4,8 @@ import { Server } from 'socket.io';
 import http from 'http'
 import cors from 'cors';
 import router from './routes/auth.js';
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'; 
+
 
 dotenv.config();
 const app = express();
@@ -19,7 +20,6 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', router);
 connect();
-
 
 const server = http.createServer(app);
 const io = new Server(server, {

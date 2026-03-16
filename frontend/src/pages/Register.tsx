@@ -14,7 +14,7 @@ const email = useRef<HTMLInputElement>(null);
 const password = useRef<HTMLInputElement>(null);
 const navigate = useNavigate();
  const goToLogin =()=>{
-navigate("/Login");
+navigate("/");
  }
 
 //fetching data from backend
@@ -34,8 +34,8 @@ async function handleRegister(e: FormEvent<HTMLFormElement>) {
     const data = await registerUser(authDetail);
 
     if (data.token) {
- localStorage.setItem("token", data.token); 
-  navigate("/dashboard");
+  toast.success("Registration successful. Please login.");
+  navigate("/login");
      // navigate("/login");
     } else {
       toast.error(data.message || "Registration failed");
@@ -64,7 +64,7 @@ async function handleRegister(e: FormEvent<HTMLFormElement>) {
           </label>
           <input
             ref={userName}
-            type="name"
+            type="text"
             id="name"
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             placeholder="username"
